@@ -1,0 +1,168 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+ 
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+ 
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+ 
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+ 
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+ 
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+ 
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+ 
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+ 
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+ 
+    --radius: 0.5rem;
+  }
+ 
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  /* Improved animations with faster transitions */
+  @keyframes equalizer {
+    0% {
+      transform: scaleY(0.3);
+    }
+    100% {
+      transform: scaleY(1);
+    }
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+
+  @keyframes breathe {
+    0% {
+      transform: scale(1);
+      opacity: 0.7;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0.7;
+    }
+  }
+  
+  @keyframes fade-in-out {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* Enhanced spinner animation with color gradient effect */
+  @keyframes spin-pulse {
+    0% {
+      transform: rotate(0deg);
+      opacity: 0.6;
+      border-top-color: theme('colors.blue.400');
+    }
+    50% {
+      opacity: 1;
+      border-top-color: theme('colors.purple.500');
+    }
+    100% {
+      transform: rotate(360deg);
+      opacity: 0.6;
+      border-top-color: theme('colors.blue.400');
+    }
+  }
+  
+  /* New background pulse animation for processing indicator */
+  @keyframes bg-pulse {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
+
+/* Custom styles */
+textarea:focus, input:focus {
+  @apply ring-1 ring-gray-200 outline-none;
+}
+
+.hover-transition {
+  @apply transition-all duration-200 ease-in-out;
+}
+
+.mic-button {
+  @apply relative overflow-hidden transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95;
+}
+
+.mic-button::before {
+  content: '';
+  @apply absolute inset-0 bg-black bg-opacity-0 rounded-full transition-all duration-300;
+}
+
+.mic-button:hover::before {
+  @apply bg-opacity-5;
+}
+
+.equalizer-bar {
+  animation: equalizer 0.8s ease-in-out infinite alternate;
+  transform-origin: bottom;
+}
+
+/* Processing animation styles */
+.processing-spinner {
+  @apply absolute inset-0 flex items-center justify-center;
+  animation: spin-pulse 1.5s linear infinite;
+}
+
+.processing-core {
+  @apply absolute inset-0 flex items-center justify-center;
+  background: linear-gradient(to right, theme('colors.blue.400'), theme('colors.purple.500'));
+  background-size: 200% 200%;
+  animation: bg-pulse 2s ease infinite;
+}
